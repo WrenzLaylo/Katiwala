@@ -18,7 +18,12 @@
   },
   "packageManager": "npm@10.8.1",
   "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+    "apps/mobile",
+    "apps/web"
+  ],
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "prisma": "^7.8.0"
+  }
 }
