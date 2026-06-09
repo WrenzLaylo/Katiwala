@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express'
 import supabase from '../lib/supabase'
 import prisma from '../lib/prisma'
 
+const DEV_OTP_BYPASS = process.env.DEV_OTP_BYPASS === 'true'
+
 export interface AuthRequest extends Request {
   user?: {
     id: string
@@ -23,14 +25,24 @@ export const authenticate = async (
 
   const token = authHeader.split(' ')[1]
 
-  const { data: { user }, error } = await supabase.auth.getUser(token)
+  // Dev-mode tokens are "dev.<userId>" and resolve straight from the database,
+  // skipping Supabase. Only honored when DEV_OTP_BYPASS is enabled.
+  let userId: string
 
-  if (error || !user) {
-    return res.status(401).json({ error: 'Invalid or expired token' })
+  if (DEV_OTP_BYPASS && token.startsWith('dev.')) {
+    userId = token.slice('dev.'.length)
+  } else {
+    const { data: { user }, error } = await supabase.auth.getUser(token)
+
+    if (error || !user) {
+      return res.status(401).json({ error: 'Invalid or expired token' })
+    }
+
+    userId = user.id
   }
 
   const dbUser = await prisma.user.findUnique({
-    where: { id: user.id },
+    where: { id: userId },
   })
 
   if (!dbUser) {

@@ -8,10 +8,39 @@ export interface User {
   status: string;
 }
 
+export interface EmailSignupInput {
+  fullName: string;
+  phone: string;
+  email: string;
+  password: string;
+  role: 'CUSTOMER' | 'TRADESMAN';
+}
+
+async function persistSession(data: {
+  accessToken: string;
+  refreshToken: string;
+  user: User;
+}) {
+  await tokenStorage.setItem('accessToken', data.accessToken);
+  await tokenStorage.setItem('refreshToken', data.refreshToken);
+  await tokenStorage.setItem('user', JSON.stringify(data.user));
+  return data.user;
+}
+
 export const AuthService = {
   async sendOtp(phone: string) {
     const res = await api.post('/auth/send-otp', { phone });
     return res.data;
+  },
+
+  async signupEmail(input: EmailSignupInput) {
+    const res = await api.post('/auth/signup-email', input);
+    return persistSession(res.data);
+  },
+
+  async loginEmail(email: string, password: string) {
+    const res = await api.post('/auth/login-email', { email, password });
+    return persistSession(res.data);
   },
 
   async verifyOtp(phone: string, token: string, role: string) {

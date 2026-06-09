@@ -1,0 +1,2 @@
+ALTER TABLE "addresses" ALTER COLUMN "latitude" DROP NOT NULL;
+ALTER TABLE "addresses" ALTER COLUMN "longitude" DROP NOT NULL;

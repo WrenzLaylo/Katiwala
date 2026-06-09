@@ -1,24 +1,25 @@
 import { useState } from 'react';
-import {
-  ActivityIndicator,
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Alert, Image, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 import { useRouter } from 'expo-router';
 
+import { Button, Chip, FlagBar, Input, Screen } from '@/components/ui';
+import { Brand } from '@/constants/brand';
 import { AuthService } from '../../lib/auth';
+
+const fullLogo = require('@/assets/images/katiwala-logo.png');
+
+const ROLES = [
+  { value: 'CUSTOMER', label: 'Customer' },
+  { value: 'TRADESMAN', label: 'Tradesman' },
+] as const;
 
 export default function PhoneScreen() {
   const [phone, setPhone] = useState('+63');
   const [role, setRole] = useState<'CUSTOMER' | 'TRADESMAN'>('CUSTOMER');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { width } = useWindowDimensions();
+  const logoHeight = Math.min(Math.max(width * 0.5, 150), 260);
 
   const handleSendOtp = async () => {
     if (phone.length < 12) {
@@ -38,97 +39,70 @@ export default function PhoneScreen() {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-      style={styles.container}>
-      <View style={styles.inner}>
-        <Text style={styles.logo}>KATIWALA</Text>
-        <Text style={styles.tagline}>Katiwala Mo Sa Serbisyo</Text>
+    <Screen centered>
+      <FlagBar style={styles.flag} />
 
-        <Text style={styles.label}>Mobile Number</Text>
-        <TextInput
-          keyboardType="phone-pad"
-          maxLength={13}
-          onChangeText={setPhone}
-          placeholder="+639XXXXXXXXX"
-          placeholderTextColor="#999"
-          style={styles.input}
-          value={phone}
-        />
+      <Image source={fullLogo} resizeMode="contain" style={[styles.logo, { height: logoHeight }]} />
 
-        <Text style={styles.label}>I am a...</Text>
-        <View style={styles.roleRow}>
-          {(['CUSTOMER', 'TRADESMAN'] as const).map((currentRole) => (
-            <TouchableOpacity
-              key={currentRole}
-              onPress={() => setRole(currentRole)}
-              style={[styles.roleBtn, role === currentRole && styles.roleBtnActive]}>
-              <Text
-                style={[
-                  styles.roleBtnText,
-                  role === currentRole && styles.roleBtnTextActive,
-                ]}>
-                {currentRole === 'CUSTOMER' ? 'Customer' : 'Tradesman'}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+      <Text style={styles.title}>Trusted hands for every job.</Text>
+      <Text style={styles.subtitle}>
+        Book verified Filipino tradesmen for home service work.
+      </Text>
 
-        <TouchableOpacity
-          disabled={loading}
-          onPress={handleSendOtp}
-          style={[styles.btn, loading && styles.btnDisabled]}>
-          {loading ? (
-            <ActivityIndicator color="#fff" />
-          ) : (
-            <Text style={styles.btnText}>Send OTP</Text>
-          )}
-        </TouchableOpacity>
+      <Input
+        containerStyle={styles.field}
+        keyboardType="phone-pad"
+        label="Mobile number"
+        maxLength={13}
+        onChangeText={setPhone}
+        placeholder="+639XXXXXXXXX"
+        value={phone}
+      />
+
+      <Text style={styles.label}>Continue as</Text>
+      <View style={styles.roleRow}>
+        {ROLES.map((option) => (
+          <Chip
+            key={option.value}
+            active={role === option.value}
+            label={option.label}
+            onPress={() => setRole(option.value)}
+            style={styles.roleChip}
+          />
+        ))}
       </View>
-    </KeyboardAvoidingView>
+
+      <Button
+        loading={loading}
+        onPress={handleSendOtp}
+        style={styles.submit}
+        title="Send OTP"
+      />
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff' },
-  inner: { flex: 1, padding: 24, justifyContent: 'center' },
-  logo: {
-    fontSize: 36,
+  flag: { marginBottom: 24 },
+  logo: { width: '100%', marginBottom: 10 },
+  title: {
+    color: Brand.ink,
+    fontSize: 28,
     fontWeight: '900',
-    color: '#1A3FB0',
+    lineHeight: 33,
     textAlign: 'center',
-    letterSpacing: 2,
   },
-  tagline: { fontSize: 14, color: '#666', textAlign: 'center', marginBottom: 48 },
-  label: { fontSize: 14, fontWeight: '600', color: '#333', marginBottom: 8, marginTop: 16 },
-  input: {
-    borderWidth: 1.5,
-    borderColor: '#ddd',
-    borderRadius: 12,
-    padding: 14,
-    fontSize: 16,
-    color: '#111',
-    backgroundColor: '#fafafa',
+  subtitle: {
+    color: Brand.slate,
+    fontSize: 15,
+    lineHeight: 22,
+    textAlign: 'center',
+    marginTop: 8,
+    marginBottom: 28,
   },
-  roleRow: { flexDirection: 'row', gap: 12, marginTop: 4 },
-  roleBtn: {
-    flex: 1,
-    padding: 14,
-    borderRadius: 12,
-    borderWidth: 1.5,
-    borderColor: '#ddd',
-    alignItems: 'center',
-  },
-  roleBtnActive: { borderColor: '#1A3FB0', backgroundColor: '#EEF2FF' },
-  roleBtnText: { fontSize: 14, fontWeight: '600', color: '#666' },
-  roleBtnTextActive: { color: '#1A3FB0' },
-  btn: {
-    backgroundColor: '#1A3FB0',
-    borderRadius: 12,
-    padding: 16,
-    alignItems: 'center',
-    marginTop: 32,
-  },
-  btnDisabled: { opacity: 0.6 },
-  btnText: { color: '#fff', fontSize: 16, fontWeight: '700' },
+  field: { marginTop: 4 },
+  label: { color: Brand.ink, fontSize: 14, fontWeight: '700', marginTop: 16, marginBottom: 8 },
+  roleRow: { flexDirection: 'row', gap: 12 },
+  roleChip: { flex: 1, alignItems: 'center' },
+  submit: { marginTop: 28 },
 });

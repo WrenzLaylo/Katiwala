@@ -4,6 +4,9 @@ import cors from 'cors'
 import helmet from 'helmet'
 import authRoutes from './routes/auth'
 import bookingRoutes from './routes/bookings'
+import dispatcherRoutes from './routes/dispatcher'
+import profileRoutes from './routes/profiles'
+import serviceRoutes from './routes/services'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -17,7 +20,10 @@ app.get('/health', (req, res) => {
 })
 
 app.use('/auth', authRoutes)
+app.use('/services', serviceRoutes)
+app.use(profileRoutes)
 app.use('/bookings', bookingRoutes)
+app.use('/dispatcher', dispatcherRoutes)
 
 app.listen(PORT, () => {
   console.log(`🚀 Katiwala API running on port ${PORT}`)

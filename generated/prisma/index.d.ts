@@ -6959,8 +6959,8 @@ export namespace Prisma {
     city: string
     province: string
     zipCode: string | null
-    latitude: number
-    longitude: number
+    latitude: number | null
+    longitude: number | null
     isDefault: boolean
     _count: AddressCountAggregateOutputType | null
     _avg: AddressAvgAggregateOutputType | null
@@ -7072,8 +7072,8 @@ export namespace Prisma {
       city: string
       province: string
       zipCode: string | null
-      latitude: number
-      longitude: number
+      latitude: number | null
+      longitude: number | null
       isDefault: boolean
     }, ExtArgs["result"]["address"]>
     composites: {}
@@ -29616,8 +29616,8 @@ export namespace Prisma {
     city?: StringFilter<"Address"> | string
     province?: StringFilter<"Address"> | string
     zipCode?: StringNullableFilter<"Address"> | string | null
-    latitude?: FloatFilter<"Address"> | number
-    longitude?: FloatFilter<"Address"> | number
+    latitude?: FloatNullableFilter<"Address"> | number | null
+    longitude?: FloatNullableFilter<"Address"> | number | null
     isDefault?: BoolFilter<"Address"> | boolean
     customer?: XOR<CustomerProfileScalarRelationFilter, CustomerProfileWhereInput>
     bookings?: BookingListRelationFilter
@@ -29632,8 +29632,8 @@ export namespace Prisma {
     city?: SortOrder
     province?: SortOrder
     zipCode?: SortOrderInput | SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
+    latitude?: SortOrderInput | SortOrder
+    longitude?: SortOrderInput | SortOrder
     isDefault?: SortOrder
     customer?: CustomerProfileOrderByWithRelationInput
     bookings?: BookingOrderByRelationAggregateInput
@@ -29651,8 +29651,8 @@ export namespace Prisma {
     city?: StringFilter<"Address"> | string
     province?: StringFilter<"Address"> | string
     zipCode?: StringNullableFilter<"Address"> | string | null
-    latitude?: FloatFilter<"Address"> | number
-    longitude?: FloatFilter<"Address"> | number
+    latitude?: FloatNullableFilter<"Address"> | number | null
+    longitude?: FloatNullableFilter<"Address"> | number | null
     isDefault?: BoolFilter<"Address"> | boolean
     customer?: XOR<CustomerProfileScalarRelationFilter, CustomerProfileWhereInput>
     bookings?: BookingListRelationFilter
@@ -29667,8 +29667,8 @@ export namespace Prisma {
     city?: SortOrder
     province?: SortOrder
     zipCode?: SortOrderInput | SortOrder
-    latitude?: SortOrder
-    longitude?: SortOrder
+    latitude?: SortOrderInput | SortOrder
+    longitude?: SortOrderInput | SortOrder
     isDefault?: SortOrder
     _count?: AddressCountOrderByAggregateInput
     _avg?: AddressAvgOrderByAggregateInput
@@ -29689,8 +29689,8 @@ export namespace Prisma {
     city?: StringWithAggregatesFilter<"Address"> | string
     province?: StringWithAggregatesFilter<"Address"> | string
     zipCode?: StringNullableWithAggregatesFilter<"Address"> | string | null
-    latitude?: FloatWithAggregatesFilter<"Address"> | number
-    longitude?: FloatWithAggregatesFilter<"Address"> | number
+    latitude?: FloatNullableWithAggregatesFilter<"Address"> | number | null
+    longitude?: FloatNullableWithAggregatesFilter<"Address"> | number | null
     isDefault?: BoolWithAggregatesFilter<"Address"> | boolean
   }
 
@@ -31329,8 +31329,8 @@ export namespace Prisma {
     city: string
     province: string
     zipCode?: string | null
-    latitude: number
-    longitude: number
+    latitude?: number | null
+    longitude?: number | null
     isDefault?: boolean
     customer: CustomerProfileCreateNestedOneWithoutAddressesInput
     bookings?: BookingCreateNestedManyWithoutAddressInput
@@ -31345,8 +31345,8 @@ export namespace Prisma {
     city: string
     province: string
     zipCode?: string | null
-    latitude: number
-    longitude: number
+    latitude?: number | null
+    longitude?: number | null
     isDefault?: boolean
     bookings?: BookingUncheckedCreateNestedManyWithoutAddressInput
   }
@@ -31359,8 +31359,8 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     province?: StringFieldUpdateOperationsInput | string
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: FloatFieldUpdateOperationsInput | number
-    longitude?: FloatFieldUpdateOperationsInput | number
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     customer?: CustomerProfileUpdateOneRequiredWithoutAddressesNestedInput
     bookings?: BookingUpdateManyWithoutAddressNestedInput
@@ -31375,8 +31375,8 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     province?: StringFieldUpdateOperationsInput | string
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: FloatFieldUpdateOperationsInput | number
-    longitude?: FloatFieldUpdateOperationsInput | number
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     bookings?: BookingUncheckedUpdateManyWithoutAddressNestedInput
   }
@@ -31390,8 +31390,8 @@ export namespace Prisma {
     city: string
     province: string
     zipCode?: string | null
-    latitude: number
-    longitude: number
+    latitude?: number | null
+    longitude?: number | null
     isDefault?: boolean
   }
 
@@ -31403,8 +31403,8 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     province?: StringFieldUpdateOperationsInput | string
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: FloatFieldUpdateOperationsInput | number
-    longitude?: FloatFieldUpdateOperationsInput | number
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     isDefault?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -31417,8 +31417,8 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     province?: StringFieldUpdateOperationsInput | string
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: FloatFieldUpdateOperationsInput | number
-    longitude?: FloatFieldUpdateOperationsInput | number
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     isDefault?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -33205,15 +33205,15 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -33278,20 +33278,20 @@ export namespace Prisma {
     longitude?: SortOrder
   }
 
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -33316,17 +33316,6 @@ export namespace Prisma {
     not?: NestedEnumTradesmanAvailabilityFilter<$PrismaModel> | $Enums.TradesmanAvailability
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -33336,6 +33325,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -33472,22 +33472,6 @@ export namespace Prisma {
     _max?: NestedEnumTradesmanAvailabilityFilter<$PrismaModel>
   }
 
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -33500,6 +33484,22 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -34879,8 +34879,8 @@ export namespace Prisma {
     connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
   }
 
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
@@ -35035,16 +35035,16 @@ export namespace Prisma {
     set?: $Enums.TradesmanAvailability
   }
 
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -36038,15 +36038,15 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -36054,20 +36054,20 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -36092,17 +36092,6 @@ export namespace Prisma {
     not?: NestedEnumTradesmanAvailabilityFilter<$PrismaModel> | $Enums.TradesmanAvailability
   }
 
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -36112,6 +36101,17 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedEnumTradesmanStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -36134,22 +36134,6 @@ export namespace Prisma {
     _max?: NestedEnumTradesmanAvailabilityFilter<$PrismaModel>
   }
 
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -36162,6 +36146,22 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -36797,8 +36797,8 @@ export namespace Prisma {
     city: string
     province: string
     zipCode?: string | null
-    latitude: number
-    longitude: number
+    latitude?: number | null
+    longitude?: number | null
     isDefault?: boolean
     bookings?: BookingCreateNestedManyWithoutAddressInput
   }
@@ -36811,8 +36811,8 @@ export namespace Prisma {
     city: string
     province: string
     zipCode?: string | null
-    latitude: number
-    longitude: number
+    latitude?: number | null
+    longitude?: number | null
     isDefault?: boolean
     bookings?: BookingUncheckedCreateNestedManyWithoutAddressInput
   }
@@ -37040,8 +37040,8 @@ export namespace Prisma {
     city?: StringFilter<"Address"> | string
     province?: StringFilter<"Address"> | string
     zipCode?: StringNullableFilter<"Address"> | string | null
-    latitude?: FloatFilter<"Address"> | number
-    longitude?: FloatFilter<"Address"> | number
+    latitude?: FloatNullableFilter<"Address"> | number | null
+    longitude?: FloatNullableFilter<"Address"> | number | null
     isDefault?: BoolFilter<"Address"> | boolean
   }
 
@@ -38385,8 +38385,8 @@ export namespace Prisma {
     city: string
     province: string
     zipCode?: string | null
-    latitude: number
-    longitude: number
+    latitude?: number | null
+    longitude?: number | null
     isDefault?: boolean
     customer: CustomerProfileCreateNestedOneWithoutAddressesInput
   }
@@ -38400,8 +38400,8 @@ export namespace Prisma {
     city: string
     province: string
     zipCode?: string | null
-    latitude: number
-    longitude: number
+    latitude?: number | null
+    longitude?: number | null
     isDefault?: boolean
   }
 
@@ -38690,8 +38690,8 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     province?: StringFieldUpdateOperationsInput | string
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: FloatFieldUpdateOperationsInput | number
-    longitude?: FloatFieldUpdateOperationsInput | number
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     customer?: CustomerProfileUpdateOneRequiredWithoutAddressesNestedInput
   }
@@ -38705,8 +38705,8 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     province?: StringFieldUpdateOperationsInput | string
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: FloatFieldUpdateOperationsInput | number
-    longitude?: FloatFieldUpdateOperationsInput | number
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     isDefault?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -40519,8 +40519,8 @@ export namespace Prisma {
     city: string
     province: string
     zipCode?: string | null
-    latitude: number
-    longitude: number
+    latitude?: number | null
+    longitude?: number | null
     isDefault?: boolean
   }
 
@@ -40564,8 +40564,8 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     province?: StringFieldUpdateOperationsInput | string
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: FloatFieldUpdateOperationsInput | number
-    longitude?: FloatFieldUpdateOperationsInput | number
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     bookings?: BookingUpdateManyWithoutAddressNestedInput
   }
@@ -40578,8 +40578,8 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     province?: StringFieldUpdateOperationsInput | string
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: FloatFieldUpdateOperationsInput | number
-    longitude?: FloatFieldUpdateOperationsInput | number
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     isDefault?: BoolFieldUpdateOperationsInput | boolean
     bookings?: BookingUncheckedUpdateManyWithoutAddressNestedInput
   }
@@ -40592,8 +40592,8 @@ export namespace Prisma {
     city?: StringFieldUpdateOperationsInput | string
     province?: StringFieldUpdateOperationsInput | string
     zipCode?: NullableStringFieldUpdateOperationsInput | string | null
-    latitude?: FloatFieldUpdateOperationsInput | number
-    longitude?: FloatFieldUpdateOperationsInput | number
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     isDefault?: BoolFieldUpdateOperationsInput | boolean
   }
 

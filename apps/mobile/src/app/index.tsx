@@ -13,12 +13,14 @@ export default function Index() {
         AuthService.getUser().then((user) => {
           if (user?.role === 'TRADESMAN') {
             router.replace('/(tradesman)/dashboard');
+          } else if (user?.role === 'ADMIN' || user?.role === 'DISPATCHER') {
+            router.replace('/(dispatcher)/dashboard');
           } else {
             router.replace('/(customer)/home');
           }
         });
       } else {
-        router.replace('/(auth)/phone');
+        router.replace('/(auth)/auth');
       }
     });
   }, [router]);

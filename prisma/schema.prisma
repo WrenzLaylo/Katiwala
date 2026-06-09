@@ -203,8 +203,8 @@ model Address {
   city        String
   province    String
   zipCode     String?
-  latitude    Float
-  longitude   Float
+  latitude    Float?
+  longitude   Float?
   isDefault   Boolean @default(false)
 
   customer  CustomerProfile @relation(fields: [customerId], references: [id], onDelete: Cascade)
